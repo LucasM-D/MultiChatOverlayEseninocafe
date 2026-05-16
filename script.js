@@ -178,15 +178,17 @@ async function renderEventCard(data, type, platform) {
 		if (senderName === 'Anonymous') usernameDiv.classList.add('is-anonymous');
 	}
 
-	if (showPlatform && !data.isAnonymous) {
+	if (showPlatform && senderName !== 'Anonymous') {
 		platformDiv.innerHTML = `<img src="icons/platforms/${platform}.png" class="platform"/>`;
+		platformDiv.style.display = 'flex';
 	} else {
 		platformDiv.style.display = 'none';
 	}
 
-	if (showAvatar && !data.isAnonymous) {
+	if (showAvatar && senderName !== 'Anonymous') {
 		const avatarURL = await GetAvatar(senderName, data.user?.profileImageUrl, platform);
 		avatarDiv.innerHTML = `<img src="${avatarURL}" class="avatar">`;
+		avatarDiv.style.display = 'flex';
 	} else {
 		avatarDiv.style.display = 'none';
 	}
