@@ -113,8 +113,6 @@ li {
 	width: 100%;
 	gap: 6px;
 	transform: translateZ(0);
-	border-radius: var(--border-radius);
-	padding: 12px;
 }
 
 #userInfo {

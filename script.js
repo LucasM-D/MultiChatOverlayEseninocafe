@@ -180,11 +180,15 @@ async function renderEventCard(data, type, platform) {
 
 	if (showPlatform && !data.isAnonymous) {
 		platformDiv.innerHTML = `<img src="icons/platforms/${platform}.png" class="platform"/>`;
+	} else {
+		platformDiv.style.display = 'none';
 	}
 
 	if (showAvatar && !data.isAnonymous) {
 		const avatarURL = await GetAvatar(senderName, data.user?.profileImageUrl, platform);
 		avatarDiv.innerHTML = `<img src="${avatarURL}" class="avatar">`;
+	} else {
+		avatarDiv.style.display = 'none';
 	}
 	
 	if (isIndividualGift) {
@@ -223,7 +227,7 @@ async function renderEventCard(data, type, platform) {
 			description = `Became a Channel Member!`;
 			break;
 		case 'raid':
-			description = `Raiding with a Party of ${data.viewers} Homies`;
+			description = `Raiding with a Party of ${data.viewers} ${data.viewers === 1 ? 'Homie' : 'Homies'}`;
 			break;
 		case 'donation':
 			description = `Donated ${data.formattedAmount}`;
