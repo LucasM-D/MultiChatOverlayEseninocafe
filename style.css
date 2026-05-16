@@ -164,6 +164,7 @@ li {
 	display: flex;
 	align-items: center;
 	font-weight: 700;
+	font-size: 18px;
 	color: var(--twitch-purple); 
 	flex-shrink: 0;
 }
