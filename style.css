@@ -109,10 +109,12 @@ li {
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
-	background: transparent !important;
+	background: #ffffff !important;
 	width: 100%;
 	gap: 6px;
 	transform: translateZ(0);
+	border-radius: var(--border-radius);
+	padding: 12px;
 }
 
 #userInfo {
