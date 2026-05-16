@@ -49,6 +49,8 @@ html, body {
 	width: 502px;
 	height: 100%;
 	box-sizing: border-box;
+	transform: translateZ(0);
+    will-change: transform;
 }
 
 #mainContainer::after {
@@ -466,7 +468,7 @@ li.sub-card-li {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	max-width: 370px;
+	max-width: 380px;
 	min-width: 0;
 	overflow: visible;
 	flex-shrink: 1;
