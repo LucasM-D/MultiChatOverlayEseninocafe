@@ -43,27 +43,12 @@ html, body {
 }
 
 #mainContainer {
-    position: relative;
-    background: transparent;
-    padding: 0;
-    width: 502px;
-    height: 100%;
-    box-sizing: border-box;
-
-    -webkit-mask-image: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0) 0px,
-        rgba(0,0,0,0) 11px,
-        rgba(0,0,0,1) 46px,
-        rgba(0,0,0,1) 100%
-    );
-    mask-image: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0) 0px,
-        rgba(0,0,0,0) 11px,
-        rgba(0,0,0,1) 46px,
-        rgba(0,0,0,1) 100%
-    );
+	position: relative;
+	background: transparent; /* removed !important */
+	padding: 0;
+	width: 502px;
+	height: 100%;
+	box-sizing: border-box;
 }
 
 #messageList {
@@ -72,7 +57,10 @@ html, body {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	height: 100%;
 	position: absolute;
+	-webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 11px, rgba(0,0,0,1) 46px, rgba(0,0,0,1) 100%);
+	mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 11px, rgba(0,0,0,1) 46px, rgba(0,0,0,1) 100%);
 }
 
 .normalScrollDirection { bottom: 0; }
