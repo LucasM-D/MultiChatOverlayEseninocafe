@@ -52,15 +52,14 @@ html, body {
 }
 
 #messageList {
-	list-style: none;
-	background: transparent !important;
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	-webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 11px, rgba(0,0,0,1) 46px, rgba(0,0,0,1) 100%);
-	mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 11px, rgba(0,0,0,1) 46px, rgba(0,0,0,1) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 11px, rgba(0,0,0,1) 46px, rgba(0,0,0,1) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 11px, rgba(0,0,0,1) 46px, rgba(0,0,0,1) 100%);
+    mask-size: 100% 9999px;
+    -webkit-mask-size: 100% 9999px;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: 0 0; /* JS will update this */
+    -webkit-mask-position: 0 0;
 }
 
 .normalScrollDirection { bottom: 0; }
