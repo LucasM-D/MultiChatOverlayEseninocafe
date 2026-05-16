@@ -110,12 +110,17 @@ async function renderFeaturedMessage(data, headerText, platform) {
 	const usernameSpan = instance.querySelector("#username");
 	usernameSpan.innerText = data.user.name;
 	usernameSpan.style.color = platform === 'twitch' ? '#A644FF' : '#FF0000';
-	
-	const avatarUrl = await GetAvatar(data.user.name, data.user.profileImageUrl, platform);
-	instance.querySelector("#avatar").innerHTML = `<img src="${avatarUrl}" class="avatar">`;
-	
-	const platformIcon = platform === 'twitch' ? 'icons/platforms/twitch.png' : 'icons/platforms/youtube.png';
-	instance.querySelector("#platform").innerHTML = `<img src="${platformIcon}">`;
+
+	if (data.user.name !== 'Anonymous') {
+		const avatarUrl = await GetAvatar(data.user.name, data.user.profileImageUrl, platform);
+		instance.querySelector("#avatar").innerHTML = `<img src="${avatarUrl}" class="avatar">`;
+
+		const platformIcon = platform === 'twitch' ? 'icons/platforms/twitch.png' : 'icons/platforms/youtube.png';
+		instance.querySelector("#platform").innerHTML = `<img src="${platformIcon}">`;
+	} else {
+		instance.querySelector("#avatar").style.display = 'none';
+		instance.querySelector("#platform").style.display = 'none';
+	}
 
 	let textContent = "";
 	if (typeof data.message === 'string') textContent = data.message;
