@@ -51,15 +51,27 @@ html, body {
 	box-sizing: border-box;
 }
 
+#mainContainer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 46px; /* Adjust this height to match your desired fade area */
+    pointer-events: none; /* Allows mouse interactions to pass through to messages */
+    background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 1) 0px, 
+        rgba(255, 255, 255, 0) 46px);
+    z-index: 1000; /* Ensures it stays on top of the list */
+}
+
 #messageList {
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 11px, rgba(0,0,0,1) 46px, rgba(0,0,0,1) 100%);
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 11px, rgba(0,0,0,1) 46px, rgba(0,0,0,1) 100%);
-    mask-size: 100% 9999px;
-    -webkit-mask-size: 100% 9999px;
-    mask-repeat: no-repeat;
-    -webkit-mask-repeat: no-repeat;
-    mask-position: 0 0; /* JS will update this */
-    -webkit-mask-position: 0 0;
+	list-style: none;
+	background: transparent !important;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	position: absolute;
 }
 
 .normalScrollDirection { bottom: 0; }
