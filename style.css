@@ -466,7 +466,7 @@ li.sub-card-li {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	max-width: 400px;
+	max-width: 370px;
 	min-width: 0;
 	overflow: visible;
 	flex-shrink: 1;
