@@ -111,7 +111,8 @@ li {
 	align-items: flex-start;
 	background: transparent !important;
 	width: 100%;
-	gap: 6px; 
+	gap: 6px;
+	transform: translateZ(0);
 }
 
 #userInfo {
@@ -461,8 +462,8 @@ li.sub-card-li {
 
 .sub-user-content #username {
 	display: block;
-	flex-shrink: 0;        
-	max-width: 116px;      
+	flex-shrink: 1;
+	min-width: 0;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;

@@ -109,7 +109,7 @@ async function renderFeaturedMessage(data, headerText, platform) {
 
 	const usernameSpan = instance.querySelector("#username");
 	usernameSpan.innerText = data.user.name;
-	usernameSpan.style.color = data.user.color || '#000000';
+	usernameSpan.style.color = platform === 'twitch' ? '#A644FF' : '#FF0000';
 	
 	const avatarUrl = await GetAvatar(data.user.name, data.user.profileImageUrl, platform);
 	instance.querySelector("#avatar").innerHTML = `<img src="${avatarUrl}" class="avatar">`;
