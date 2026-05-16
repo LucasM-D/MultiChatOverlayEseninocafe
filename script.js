@@ -78,6 +78,8 @@ client.on('YouTube.MembershipGift', (data) => YouTubeGiftMembershipReceived(data
 client.on('Streamlabs.Donation', (data) => StreamlabsDonation(data.data));
 client.on('StreamElements.Tip', (data) => StreamElementsTip(data.data));
 
+const avatarMap = new Map();
+
 function SetConnectionStatus(connected) {
 	let statusContainer = document.getElementById("statusContainer");
 	if (connected) {
@@ -109,13 +111,32 @@ async function renderFeaturedMessage(data, headerText, platform) {
 	usernameSpan.innerText = data.user.name;
 	usernameSpan.style.color = data.user.color || '#000000';
 	
-	const avatarUrl = await GetAvatar(data.user.name, data.user.profileImageUrl);
+	const avatarUrl = await GetAvatar(data.user.name, data.user.profileImageUrl, platform);
 	instance.querySelector("#avatar").innerHTML = `<img src="${avatarUrl}" class="avatar">`;
 	
 	const platformIcon = platform === 'twitch' ? 'icons/platforms/twitch.png' : 'icons/platforms/youtube.png';
 	instance.querySelector("#platform").innerHTML = `<img src="${platformIcon}">`;
 
-	instance.querySelector(".featured-message-text").innerHTML = linkify(data.text || data.message || "");
+	let textContent = "";
+	if (typeof data.message === 'string') textContent = data.message;
+	else if (data.message && typeof data.message.message === 'string') textContent = data.message.message;
+	else if (data.text) textContent = data.text;
+
+	// Safely HTML escape, highlight @mentions, and linkify
+	const tempDiv = document.createElement('div');
+	tempDiv.innerText = textContent;
+	let escapedText = tempDiv.innerHTML;
+	const platformColor = platform === 'twitch' ? '#A644FF' : '#FF0000';
+	escapedText = escapedText.replace(/(^|\s)(@[^\s<]+)/g, `$1<span style="font-weight: bold; color: ${platformColor};">$2</span>`);
+
+	instance.querySelector(".featured-message-text").innerHTML = linkify(escapedText);
+
+	// Parse emotes for featured messages too
+	if (data.emotes) {
+		data.emotes.forEach(e => {
+			instance.querySelector(".featured-message-text").innerHTML = instance.querySelector(".featured-message-text").innerHTML.replace(new RegExp(`\\b${e.name}\\b`, 'g'), `<img src="${e.imageUrl}" class="emote"/>`);
+		});
+	}
 
 	AddSubCardItem(instance, data.messageId || data.eventId, platform, data.user.id);
 }
@@ -162,7 +183,7 @@ async function renderEventCard(data, type, platform) {
 	}
 
 	if (showAvatar && !data.isAnonymous) {
-		const avatarURL = await GetAvatar(senderName, data.user?.profileImageUrl);
+		const avatarURL = await GetAvatar(senderName, data.user?.profileImageUrl, platform);
 		avatarDiv.innerHTML = `<img src="${avatarURL}" class="avatar">`;
 	}
 	
@@ -172,7 +193,7 @@ async function renderEventCard(data, type, platform) {
 			receiverSpan.style.display = 'flex';
 			const recAvatarDiv = instance.querySelector("#receiver-avatar");
 			if (showAvatar) {
-				const recAvatarURL = await GetAvatar(receiverName, data.recipient?.profileImageUrl);
+				const recAvatarURL = await GetAvatar(receiverName, data.recipient?.profileImageUrl, platform);
 				recAvatarDiv.innerHTML = `<img src="${recAvatarURL}" class="avatar">`;
 			}
 			if (showPlatform) instance.querySelector("#receiver-platform").innerHTML = `<img src="icons/platforms/${platform}.png" class="platform"/>`;
@@ -226,7 +247,7 @@ async function renderEventCard(data, type, platform) {
 }
 
 async function TwitchChatMessage(data) {
-	if (data.isFirstMessage) return await renderFeaturedMessage(data, "FIRST TIME CHAT", 'twitch');
+	if (data.message?.firstMessage) return await renderFeaturedMessage(data, "FIRST TIME CHAT", 'twitch');
 	if (!showTwitchMessages || (data.message.message.startsWith("!") && excludeCommands) || ignoreUserList.includes(data.message.username)) return;
 
 	const template = document.getElementById('messageTemplate');
@@ -252,7 +273,11 @@ async function TwitchChatMessage(data) {
 	}
 
 	const messageDiv = instance.querySelector("#message");
-	if (showMessage) messageDiv.innerText = data.message.message;
+	if (showMessage) {
+		messageDiv.innerText = data.message.message;
+		// Detect and highlight @mentions
+		messageDiv.innerHTML = messageDiv.innerHTML.replace(/(^|\s)(@[^\s<]+)/g, `$1<span style="font-weight: bold; color: #A644FF;">$2</span>`);
+	}
 	if (data.message.isMe) messageDiv.style.color = data.message.color;
 
 	if (showPlatform) instance.querySelector("#platform").innerHTML = `<img src="icons/platforms/twitch.png" class="platform"/>`;
@@ -267,26 +292,19 @@ async function TwitchChatMessage(data) {
 	}
 
 	data.emotes.forEach(e => {
-		messageDiv.innerHTML = messageDiv.innerHTML.replace(new RegExp(`\\b${e.name}\\b`), `<img src="${e.imageUrl}" class="emote"/>`);
+		messageDiv.innerHTML = messageDiv.innerHTML.replace(new RegExp(`\\b${e.name}\\b`, 'g'), `<img src="${e.imageUrl}" class="emote"/>`);
 	});
 
 	if (data.cheerEmotes) {
 		data.cheerEmotes.forEach(e => {
 			const bitsElements = `<span class="bits">${e.bits}</span>`;
-			messageDiv.innerHTML = messageDiv.innerHTML.replace(new RegExp(`\\b${e.name}${e.bits}\\b`, 'i'), `<img src="${e.imageUrl}" class="emote"/>` + bitsElements);
+			messageDiv.innerHTML = messageDiv.innerHTML.replace(new RegExp(`\\b${e.name}${e.bits}\\b`, 'ig'), `<img src="${e.imageUrl}" class="emote"/>` + bitsElements);
 		});
 	}
 
 	if (showAvatar) {
-		const avatarURL = await GetAvatar(data.message.username);
+		const avatarURL = await GetAvatar(data.message.username, null, 'twitch');
 		instance.querySelector("#avatar").innerHTML = `<img src="${avatarURL}" class="avatar">`;
-	}
-
-	const messageList = document.getElementById("messageList");
-	if (messageList.children.length > 0 && scrollDirection !== 2) {
-		const lastPlatform = messageList.lastChild.dataset.platform;
-		const lastUserId = messageList.lastChild.dataset.userId;
-		if (lastPlatform === "twitch" && lastUserId === data.user.id) instance.querySelector("#userInfo").style.display = "none";
 	}
 
 	const messageText = data.message.message;
@@ -399,7 +417,7 @@ function TwitchChatCleared() {
 }
 
 async function YouTubeMessage(data) {
-	if (data.isFirstMessage) return await renderFeaturedMessage(data, "FIRST TIME CHAT", 'youtube');
+	if (data.isFirstMessage || data.message?.firstMessage) return await renderFeaturedMessage(data, "FIRST TIME CHAT", 'youtube');
 	if (!showYouTubeMessages || (data.message.startsWith("!") && excludeCommands) || ignoreUserList.includes(data.user.name)) return;
 
 	const template = document.getElementById('messageTemplate');
@@ -417,7 +435,11 @@ async function YouTubeMessage(data) {
 	}
 
 	const messageDiv = instance.querySelector("#message");
-	if (showMessage) messageDiv.innerText = data.message;
+	if (showMessage) {
+		messageDiv.innerText = data.message;
+		// Detect and highlight @mentions
+		messageDiv.innerHTML = messageDiv.innerHTML.replace(/(^|\s)(@[^\s<]+)/g, `$1<span style="font-weight: bold; color: #FF0000;">$2</span>`);
+	}
 
 	if (showPlatform) instance.querySelector("#platform").innerHTML = `<img src="icons/platforms/youtube.png" class="platform"/>`;
 
@@ -431,15 +453,11 @@ async function YouTubeMessage(data) {
 		if (data.user.isVerified) addBadge('youtube-verified.svg');
 	}
 
-	data.emotes.forEach(e => { messageDiv.innerHTML = messageDiv.innerHTML.replace(e.name, `<img src="${e.imageUrl}" class="emote"/>`); });
+	data.emotes.forEach(e => { messageDiv.innerHTML = messageDiv.innerHTML.replace(new RegExp(e.name, 'g'), `<img src="${e.imageUrl}" class="emote"/>`); });
 
-	if (showAvatar) instance.querySelector("#avatar").innerHTML = `<img src="${data.user.profileImageUrl || await GetAvatar(data.user.name)}" class="avatar">`;
-
-	const messageList = document.getElementById("messageList");
-	if (messageList.children.length > 0 && scrollDirection !== 2) {
-		const lastPlatform = messageList.lastChild.dataset.platform;
-		const lastUserId = messageList.lastChild.dataset.userId;
-		if (lastPlatform === "youtube" && lastUserId === data.user.id) instance.querySelector("#userInfo").style.display = "none";
+	if (showAvatar) {
+		const avatarURL = await GetAvatar(data.user.name, data.user.profileImageUrl, 'youtube');
+		instance.querySelector("#avatar").innerHTML = `<img src="${avatarURL}" class="avatar">`;
 	}
 
 	const messageText = data.message;
@@ -673,8 +691,26 @@ function GetCurrentTimeFormatted() {
 	return `${hours}:${minutes} ${ampm}`;
 }
 
-async function GetAvatar(username, providedUrl) {
+async function GetAvatar(username, providedUrl, platform) {
 	if (providedUrl) return providedUrl;
+	if (platform === 'twitch') {
+		if (avatarMap.has(username)) {
+			return avatarMap.get(username);
+		} else {
+			try {
+				let response = await fetch('https://decapi.me/twitch/avatar/' + username);
+				if (response.ok) {
+					let data = await response.text();
+					if (data && data.startsWith('http')) {
+						avatarMap.set(username, data);
+						return data;
+					}
+				}
+			} catch (e) {
+				console.error("Avatar Fetch failed:", e);
+			}
+		}
+	}
 	return `https://api.dicebear.com/7.x/thumbs/svg?seed=${encodeURIComponent(username)}&backgroundColor=b6e3f4,c0aede,d1d4f9`;
 }
 
