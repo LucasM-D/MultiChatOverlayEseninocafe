@@ -9,9 +9,9 @@ const TARGET_WIDTH = 648;
 const scaleFactor = TARGET_WIDTH / BASE_WIDTH; 
 
 document.body.style.width = `${BASE_WIDTH}px`;
-// Using CSS zoom instead of transform scale forces Chromium (and OBS Browser Source)
-// to render fonts natively at the scaled pixel size, maintaining perfect vector sharpness.
-document.body.style.zoom = scaleFactor;
+document.body.style.height = `${100 / scaleFactor}vh`;
+document.body.style.transform = `scale(${scaleFactor})`;
+document.body.style.transformOrigin = "top left";
 
 const showPlatform = GetBooleanParam("showPlatform", true);
 const showAvatar = GetBooleanParam("showAvatar", true);
