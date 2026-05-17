@@ -65,6 +65,16 @@
 			"group": "Appearance"
 		},
 		{
+			"id": "backgroundOpacity",
+			"label": "Background Opacity",
+			"description": "0 = fully transparent, 100 = fully opaque",
+			"type": "number",
+			"min": 0,
+			"max": 100,
+			"defaultValue": 100,
+			"group": "Appearance"
+		},
+		{
 			"id": "hideAfter",
 			"label": "Hide After",
 			"description": "Messages fade after X seconds (0 to disable)",

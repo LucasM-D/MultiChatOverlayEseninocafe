@@ -22,6 +22,7 @@ const showMessage = GetBooleanParam("showMessage", true);
 
 const font = urlParams.get("font") || "";
 const background = urlParams.get("background") || "#ffffff";
+const backgroundOpacity = GetIntParam("backgroundOpacity") ?? 100;
 
 const hideAfter = GetIntParam("hideAfter") || 0;
 const excludeCommands = GetBooleanParam("excludeCommands", true);
@@ -43,7 +44,7 @@ const showStreamlabsDonations = GetBooleanParam("showStreamlabsDonations", true)
 const showStreamElementsTips = GetBooleanParam("showStreamElementsTips", true);
 
 if (font) document.body.style.fontFamily = font;
-document.getElementById('mainContainer').style.background = background;
+ddocument.getElementById('mainContainer').style.background = hexToRgba(background, backgroundOpacity / 100);
 
 const ignoreUserList = ignoreChatters.split(',').map(item => item.trim().toLowerCase());
 const messageList = document.getElementById('messageList');
@@ -99,6 +100,13 @@ function SetConnectionStatus(connected) {
 	}
 }
 
+function hexToRgba(hex, alpha) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 async function renderFeaturedMessage(data, headerText, platform) {
 	const template = document.getElementById('featuredMessageTemplate');
 	if (!template) return;
@@ -127,7 +135,6 @@ async function renderFeaturedMessage(data, headerText, platform) {
 	else if (data.message && typeof data.message.message === 'string') textContent = data.message.message;
 	else if (data.text) textContent = data.text;
 
-	// Safely HTML escape, highlight @mentions, and linkify
 	const tempDiv = document.createElement('div');
 	tempDiv.innerText = textContent;
 	let escapedText = tempDiv.innerHTML;
