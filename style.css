@@ -5,7 +5,9 @@
 	--twitch-purple: #A644FF;
 	--youtube-red: #FF0000;
 	--border-radius: 20px;
-
+	-webkit-font-smoothing: subpixel-antialiased;
+	-moz-osx-font-smoothing: auto;
+	text-rendering: optimizeLegibility;
 }
 
 html, body {
@@ -46,8 +48,7 @@ html, body {
 	width: 502px;
 	height: 100%;
 	box-sizing: border-box;
-	transform: translateZ(0);
-    will-change: transform;
+	/* Removed translateZ and will-change to allow native vector rendering of text in OBS */
 }
 
 #mainContainer::after {
@@ -124,7 +125,7 @@ li {
 	background: #ffffff !important;
 	width: 100%;
 	gap: 6px;
-	transform: translateZ(0);
+	/* Removed translateZ to allow native vector rendering of text in OBS */
 }
 
 #userInfo {
