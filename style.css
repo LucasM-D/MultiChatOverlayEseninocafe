@@ -5,9 +5,6 @@
 	--twitch-purple: #A644FF;
 	--youtube-red: #FF0000;
 	--border-radius: 20px;
-
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 	text-rendering: geometricPrecision;
 }
 
