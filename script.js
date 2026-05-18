@@ -19,7 +19,6 @@ const showTimestamps = GetBooleanParam("showTimestamps", true);
 const showBadges = GetBooleanParam("showBadges", true);
 const showUsername = GetBooleanParam("showUsername", true);
 const showMessage = GetBooleanParam("showMessage", true);
-const showTopGradient = GetBooleanParam("showTopGradient", true);
 
 const font = urlParams.get("font") || "";
 const background = urlParams.get("background") || "#ffffff";
@@ -45,12 +44,7 @@ const showStreamlabsDonations = GetBooleanParam("showStreamlabsDonations", true)
 const showStreamElementsTips = GetBooleanParam("showStreamElementsTips", true);
 
 if (font) document.body.style.fontFamily = font;
-const mainContainer = document.getElementById('mainContainer');
-mainContainer.style.background = hexToRgba(background, backgroundOpacity / 100);
-
-if (!showTopGradient) {
-	mainContainer.classList.add('hide-gradient');
-}
+ddocument.getElementById('mainContainer').style.background = hexToRgba(background, backgroundOpacity / 100);
 
 const ignoreUserList = ignoreChatters.split(',').map(item => item.trim().toLowerCase());
 const messageList = document.getElementById('messageList');
