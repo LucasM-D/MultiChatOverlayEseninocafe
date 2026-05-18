@@ -1,6 +1,6 @@
 let settingsContainer = document.getElementById('settings-container');
 let currentUrl = window.location.href.split('?')[0].replace('index.html', '').replace(/\/$/, '');
-settingsContainer.src = `https://nuttylmao.github.io/widget-customizer?settingsJson=https://raw.githubusercontent.com/LucasM-D/MultiChatOverlayEseninocafe/main/settings/settings.json`;
+settingsContainer.src = `https://nuttylmao.github.io/widget-customizer?settingsJson=https://raw.githubusercontent.com/LucasM-D/MultiChatOverlayEseninocafe/main/settings/settings.json&widgetUrl=https://lucasm-d.github.io/MultiChatOverlayEseninocafe/`;
 
 let widget = document.getElementById("widget");
 widget.src = getParentUrl();
