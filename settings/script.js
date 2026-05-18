@@ -1,4 +1,4 @@
-const SETTINGS_JSON_URL = 'https://lucasm-d.github.io/MultiChatOverlayEseninocafe/settings/settings.json';
+const SETTINGS_JSON_URL = 'https://raw.githubusercontent.com/LucasM-D/MultiChatOverlayEseninocafe/main/settings/settings.json';
 
 let settings = [];
 let values = {};
