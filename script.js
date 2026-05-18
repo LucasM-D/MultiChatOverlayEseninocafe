@@ -44,7 +44,7 @@ const showStreamlabsDonations = GetBooleanParam("showStreamlabsDonations", true)
 const showStreamElementsTips = GetBooleanParam("showStreamElementsTips", true);
 
 if (font) document.body.style.fontFamily = font;
-ddocument.getElementById('mainContainer').style.background = hexToRgba(background, backgroundOpacity / 100);
+document.getElementById('mainContainer').style.background = hexToRgba(background, backgroundOpacity / 100);
 
 const ignoreUserList = ignoreChatters.split(',').map(item => item.trim().toLowerCase());
 const messageList = document.getElementById('messageList');
