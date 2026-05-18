@@ -66,6 +66,10 @@ html, body {
     z-index: 1000;
 }
 
+#mainContainer.hide-gradient::after {
+    display: none;
+}
+
 #messageList {
 	list-style: none;
 	background: transparent !important;

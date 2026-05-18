@@ -49,6 +49,14 @@
 			"group": "Appearance"
 		},
 		{
+			"id": "showTopGradient",
+			"label": "Show Top Gradient",
+			"description": "",
+			"type": "checkbox",
+			"defaultValue": true,
+			"group": "Appearance"
+		},
+		{
 			"id": "font",
 			"label": "Font",
 			"description": "",
