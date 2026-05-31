@@ -440,10 +440,16 @@ li.sub-card-li {
 	width: 100%;
 }
 
+a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
 .featured-message-text a {
 	color: #007bff;
 	text-decoration: none;
-	font-weight: bold;
+	font-weight: 500;
 }
 .featured-message-text a:hover { text-decoration: underline; }
 
