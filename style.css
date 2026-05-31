@@ -53,14 +53,14 @@ html, body {
 }
 
 #mainContainer.show-gradient {
-    -webkit-mask-image: linear-gradient(to bottom, 
-        transparent 0px, 
-        transparent 11px, 
+    -webkit-mask-image: linear-gradient(to bottom,
+        transparent 0px,
+        transparent 11px,
         black 46px
     );
-    mask-image: linear-gradient(to bottom, 
-        transparent 0px, 
-        transparent 11px, 
+    mask-image: linear-gradient(to bottom,
+        transparent 0px,
+        transparent 11px,
         black 46px
     );
 }
