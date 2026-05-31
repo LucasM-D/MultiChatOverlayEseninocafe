@@ -20,6 +20,10 @@ function getWidgetUrl() {
 }
 
 function updateWidget() {
+    const baseWidth = parseInt(values['width']) || 502;
+    const targetWidth = parseInt(values['targetWidth']) || (baseWidth === 502 ? 648 : baseWidth);
+    
+    document.getElementById('widget').style.width = targetWidth + 'px';
     document.getElementById('widget').src = getWidgetUrl();
 }
 
