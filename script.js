@@ -4,11 +4,12 @@ const urlParams = new URLSearchParams(queryString);
 const sbServerAddress = urlParams.get("address") || "127.0.0.1";
 const sbServerPort = urlParams.get("port") || "8080";
 
-const BASE_WIDTH = GetIntParam("width") || 502;
-const TARGET_WIDTH = GetIntParam("targetWidth") || (BASE_WIDTH === 502 ? 648 : BASE_WIDTH); 
+const chatWidth = GetIntParam("width") || 502;
+const BASE_WIDTH = 502; // Always keep the base width 502 for scaling so elements don't shrink
+const TARGET_WIDTH = GetIntParam("targetWidth") || 648; 
 const scaleFactor = TARGET_WIDTH / BASE_WIDTH; 
 
-document.documentElement.style.setProperty('--width', `${BASE_WIDTH}px`);
+document.documentElement.style.setProperty('--width', `${chatWidth}px`);
 document.body.style.width = `${BASE_WIDTH}px`;
 document.body.style.height = `${100 / scaleFactor}vh`;
 document.body.style.transform = `scale(${scaleFactor})`;
