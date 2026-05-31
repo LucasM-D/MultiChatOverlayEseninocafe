@@ -51,8 +51,8 @@ document.body.style.fontSize = `${fontSize}px`;
 const mainContainer = document.getElementById('mainContainer');
 mainContainer.style.background = hexToRgba(background, backgroundOpacity / 100);
 
-if (!showTopGradient) {
-	mainContainer.classList.add('hide-gradient');
+if (showTopGradient) {
+	mainContainer.classList.add('show-gradient');
 }
 
 const ignoreUserList = ignoreChatters.split(',').map(item => item.trim().toLowerCase());

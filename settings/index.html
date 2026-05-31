@@ -15,22 +15,6 @@
             position: relative;
         }
 
-        #resizer {
-            position: absolute;
-            top: 0;
-            left: 40vw;
-            width: 6px;
-            height: 100vh;
-            background: #2e2e2e;
-            cursor: ew-resize;
-            z-index: 10;
-            transition: background 0.2s;
-        }
-
-        #resizer:hover, #resizer.active {
-            background: #7c5cfc;
-        }
-
         #settings-container {
             position: absolute;
             top: 0;
@@ -159,57 +143,11 @@
         <div id="settings-scroll"></div>
     </div>
 
-    <div id="resizer"></div>
-
     <div id="widget-container">
         <iframe id="widget"></iframe>
     </div>
 
     <script src="script.js"></script>
-
-    <script>
-        const resizer = document.getElementById('resizer');
-        const settingsContainer = document.getElementById('settings-container');
-        const widgetContainer = document.getElementById('widget-container');
-        const iframe = document.getElementById('widget');
-
-        let isResizing = false;
-
-        resizer.addEventListener('mousedown', (e) => {
-            isResizing = true;
-            document.body.style.cursor = 'ew-resize';
-            resizer.classList.add('active');
-            iframe.style.pointerEvents = 'none';
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (!isResizing) return;
-            
-            let newVisualWidthVw = (e.clientX / window.innerWidth) * 100;
-            
-            // Constrain between 15vw and 85vw
-            if (newVisualWidthVw < 15) newVisualWidthVw = 15;
-            if (newVisualWidthVw > 85) newVisualWidthVw = 85;
-            
-            resizer.style.left = newVisualWidthVw + 'vw';
-            
-            // The visual width is scaled by 1.5, so the layout width is divided by 1.5
-            settingsContainer.style.width = (newVisualWidthVw / 1.5) + 'vw';
-            settingsContainer.style.minWidth = (newVisualWidthVw / 1.5) + 'vw';
-            
-            widgetContainer.style.left = newVisualWidthVw + 'vw';
-            widgetContainer.style.width = (100 - newVisualWidthVw) + 'vw';
-        });
-
-        document.addEventListener('mouseup', () => {
-            if (isResizing) {
-                isResizing = false;
-                document.body.style.cursor = '';
-                resizer.classList.remove('active');
-                iframe.style.pointerEvents = 'auto';
-            }
-        });
-    </script>
 
 </body>
 
