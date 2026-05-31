@@ -99,6 +99,7 @@ li {
 	transition: height 0.4s ease-out, opacity 0.4s ease-out;
 	will-change: height, opacity;
 	width: 100%; 
+	min-width: 0;
 }
 
 .reverseLineItemDirection {
@@ -127,6 +128,7 @@ li {
 	align-items: flex-start;
 	background: #ffffff !important;
 	width: 100%;
+	min-width: 0;
 	gap: 6px;
 	transform: translateZ(0);
 }
