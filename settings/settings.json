@@ -75,6 +75,14 @@
 			"group": "Appearance"
 		},
 		{
+			"id": "fontColor",
+			"label": "Text Color",
+			"description": "Color for regular text that isn't platform colored",
+			"type": "color",
+			"defaultValue": "#000000",
+			"group": "Appearance"
+		},
+		{
 			"id": "background",
 			"label": "Background",
 			"description": "",
