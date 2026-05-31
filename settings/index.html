@@ -10,6 +10,8 @@
             margin: 0;
             display: flex;
             background: #181818;
+            width: 100vw;
+            height: 100vh;
         }
 
         #settings-container {
@@ -21,9 +23,9 @@
             overflow: hidden;
             transform: scale(1.5);
             transform-origin: top left;
-            width: calc(40% / 1.5);
-            min-width: calc(40% / 1.5);
-            margin-right: calc(40% - (40% / 1.5));
+            width: 26.666vw;
+            min-width: 26.666vw;
+            margin-right: 13.333vw;
             flex-shrink: 0;
         }
 
@@ -114,11 +116,12 @@
         .toggle input:checked ~ .toggle-thumb { transform: translateX(16px); }
 
         #widget-container {
-            flex-grow: 1;
+            width: 60vw;
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         iframe#widget {
