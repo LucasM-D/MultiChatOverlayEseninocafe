@@ -75,6 +75,16 @@
 			"group": "Appearance"
 		},
 		{
+			"id": "width",
+			"label": "Width",
+			"description": "Width of the chat container in pixels",
+			"type": "number",
+			"min": 200,
+			"max": 2000,
+			"defaultValue": 502,
+			"group": "Appearance"
+		},
+		{
 			"id": "background",
 			"label": "Background",
 			"description": "",

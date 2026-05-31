@@ -9,9 +9,10 @@
 }
 
 html, body {
-	width: 502px;
-	min-width: 502px;
-	max-width: 502px;
+	--width: 502px;
+	width: var(--width);
+	min-width: var(--width);
+	max-width: var(--width);
 	font-size: 18px;
 	font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 	letter-spacing: 0.001em;
@@ -44,7 +45,7 @@ html, body {
 	position: relative;
 	background: transparent;
 	padding: 0;
-	width: 502px;
+	width: var(--width);
 	height: 100%;
 	box-sizing: border-box;
 	transform: translateZ(0);
@@ -99,7 +100,7 @@ li {
 	border-radius: 0 !important;
 	transition: height 0.4s ease-out, opacity 0.4s ease-out;
 	will-change: height, opacity;
-	width: 502px; 
+	width: var(--width); 
 }
 
 .reverseLineItemDirection {
@@ -116,7 +117,7 @@ li {
 	padding: 12px 24px;
 	background: transparent !important;
 	box-sizing: border-box;
-	width: 502px;
+	width: var(--width);
 	position: absolute;
 	visibility: hidden;
 }
