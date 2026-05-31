@@ -83,6 +83,14 @@
 			"group": "Appearance"
 		},
 		{
+			"id": "contrastOutline",
+			"label": "Contrast Outline",
+			"description": "Adds a 1px outline to text and usernames for readability",
+			"type": "checkbox",
+			"defaultValue": false,
+			"group": "Appearance"
+		},
+		{
 			"id": "background",
 			"label": "Background",
 			"description": "",

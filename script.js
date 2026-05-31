@@ -25,6 +25,7 @@ const showTopGradient = GetBooleanParam("showTopGradient", true);
 const font = urlParams.get("font") || "";
 const fontSize = urlParams.get("fontSize") || "18";
 const fontColor = urlParams.get("fontColor") || "#000000";
+const contrastOutline = GetBooleanParam("contrastOutline", false);
 const background = urlParams.get("background") || "#ffffff";
 const backgroundOpacity = GetIntParam("backgroundOpacity") ?? 100;
 
@@ -50,6 +51,7 @@ const showStreamElementsTips = GetBooleanParam("showStreamElementsTips", true);
 if (font) document.body.style.fontFamily = font;
 document.body.style.fontSize = `${fontSize}px`;
 document.documentElement.style.setProperty('--font-color', fontColor);
+if (contrastOutline) document.body.classList.add('contrast-outline');
 const mainContainer = document.getElementById('mainContainer');
 mainContainer.style.background = hexToRgba(background, backgroundOpacity / 100);
 

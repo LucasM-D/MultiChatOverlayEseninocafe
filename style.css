@@ -528,3 +528,26 @@ li.sub-card-li {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
+/* Contrast Outline Setting */
+.contrast-outline #message,
+.contrast-outline #replyMsg,
+.contrast-outline .sub-comment-text,
+.contrast-outline .featured-message-text,
+.contrast-outline .sub-description,
+.contrast-outline #timestamp,
+.contrast-outline .featured-header-text {
+	text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+}
+
+.contrast-outline [data-platform="twitch"] #username,
+.contrast-outline [data-platform="twitch"] #replyUser,
+.contrast-outline [data-platform="twitch"] #receiver-username {
+	text-shadow: -1px -1px 0 #2E0E4C, 1px -1px 0 #2E0E4C, -1px 1px 0 #2E0E4C, 1px 1px 0 #2E0E4C;
+}
+
+.contrast-outline [data-platform="youtube"] #username,
+.contrast-outline [data-platform="youtube"] #replyUser,
+.contrast-outline [data-platform="youtube"] #receiver-username {
+	text-shadow: -1px -1px 0 #600000, 1px -1px 0 #600000, -1px 1px 0 #600000, 1px 1px 0 #600000;
+}
