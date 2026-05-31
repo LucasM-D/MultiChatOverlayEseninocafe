@@ -216,6 +216,10 @@ li {
 	padding-right: 8px;
 }
 
+.sub-event-container #timestamp {
+	color: #000000 !important;
+}
+
 #message {
 	font-size: 1em;
 	font-weight: 500;
@@ -366,7 +370,7 @@ li.sub-card-li {
 	border-radius: 20px;
 	font-weight: 500;
 	line-height: 1.2;
-	color: var(--font-color, #000000);
+	color: #000000;
 	min-height: 40px;
 }
 
@@ -414,7 +418,7 @@ li.sub-card-li {
 	font-size: 1.11em;
 	font-weight: 700;
 	text-transform: uppercase;
-	color: var(--font-color, #000000);
+	color: #000000;
 }
 
 .featured-message-content {
@@ -429,7 +433,7 @@ li.sub-card-li {
 	font-size: 1em;
 	font-weight: 500;
 	line-height: 1.2;
-	color: var(--font-color, #000000);
+	color: #000000;
 	word-wrap: break-word;
 	white-space: pre-wrap; 
 	width: 100%;
@@ -518,7 +522,7 @@ li.sub-card-li {
 .sub-description {
 	font-weight: 600;
 	line-height: 1.2;
-	color: var(--font-color, #000000);
+	color: #000000;
 	width: 100%;
 	white-space: nowrap;
 	overflow: hidden;
