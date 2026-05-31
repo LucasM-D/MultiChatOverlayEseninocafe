@@ -75,12 +75,12 @@
 			"group": "Appearance"
 		},
 		{
-			"id": "width",
-			"label": "Width",
-			"description": "Width of the chat container in pixels",
+			"id": "containerWidth",
+			"label": "Container Width",
+			"description": "Width of the chat messages in pixels",
 			"type": "number",
 			"min": 200,
-			"max": 2000,
+			"max": 502,
 			"defaultValue": 502,
 			"group": "Appearance"
 		},

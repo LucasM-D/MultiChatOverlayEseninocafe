@@ -4,11 +4,13 @@ const urlParams = new URLSearchParams(queryString);
 const sbServerAddress = urlParams.get("address") || "127.0.0.1";
 const sbServerPort = urlParams.get("port") || "8080";
 
-const BASE_WIDTH = GetIntParam("width") || 502;
-const TARGET_WIDTH = GetIntParam("targetWidth") || (BASE_WIDTH === 502 ? 648 : BASE_WIDTH); 
+const BASE_WIDTH = 502;
+const TARGET_WIDTH = 648; 
 const scaleFactor = TARGET_WIDTH / BASE_WIDTH; 
 
-document.documentElement.style.setProperty('--width', `${BASE_WIDTH}px`);
+const containerWidth = GetIntParam("containerWidth") || 502;
+document.documentElement.style.setProperty('--container-width', `${containerWidth}px`);
+
 document.body.style.width = `${BASE_WIDTH}px`;
 document.body.style.height = `${100 / scaleFactor}vh`;
 document.body.style.transform = `scale(${scaleFactor})`;
@@ -620,7 +622,7 @@ function initBoilingBorder(canvas, contentW, contentH, bottomExtension = 0) {
 
 function AddMessageItem(element, elementID, platform, userId, customClasses = [], onAdded = null) {
 	const tempContainer = document.createElement('div');
-	tempContainer.style.cssText = `position:absolute; visibility:hidden; width:${BASE_WIDTH}px; pointer-events:none;`;
+	tempContainer.style.cssText = `position:absolute; visibility:hidden; width:${containerWidth}px; pointer-events:none;`;
 	
 	const tempLi = document.createElement('li');
 	tempLi.style.cssText = 'height:auto !important; transition:none !important; opacity:1 !important; display:block !important;';
