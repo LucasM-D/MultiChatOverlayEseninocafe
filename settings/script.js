@@ -85,7 +85,7 @@ function makeControl(s) {
 }
 
 async function init() {
-    const res = await fetch(SETTINGS_JSON_URL);
+    const res = await fetch(SETTINGS_JSON_URL + '?t=' + new Date().getTime());
     const json = await res.json();
     settings = json.settings;
     settings.forEach(s => { values[s.id] = s.defaultValue; });
