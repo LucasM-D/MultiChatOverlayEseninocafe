@@ -1,3 +1,4 @@
+const dpr = 1;
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 
@@ -477,7 +478,7 @@ async function YouTubeMessage(data) {
 	if (showBadges) {
 		const badgeListDiv = instance.querySelector("#badgeList");
 		badgeListDiv.innerHTML = ""; 
-		const addBadge = (icon) => { const b = new Image(); b.src = `icons/badges/${icon}`; b.style.filter = `invert(100%)`; b.style.opacity = 0.8; b.classList.add("badge"); badgeListDiv.appendChild(b); };
+		const addBadge = (icon) => { const b = new Image(); b.src = `icons/badges/${icon}`; b.style.filter = `invert(100%)`; b.classList.add("badge"); badgeListDiv.appendChild(b); };
 		if (data.user.isOwner) addBadge('youtube-broadcaster.svg');
 		if (data.user.isModerator) addBadge('youtube-moderator.svg');
 		if (data.user.isSponsor) addBadge('youtube-member.svg');
