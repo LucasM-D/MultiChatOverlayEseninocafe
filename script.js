@@ -154,10 +154,10 @@ async function renderFeaturedMessage(data, headerText, platform) {
 	let escapedText = tempDiv.innerHTML;
 	const platformColor = platform === 'twitch' ? '#A644FF' : '#FF0000';
 	escapedText = escapedText.replace(/(^|\s)(@[^\s<]+)/g, `$1<span style="font-weight: bold; color: ${platformColor};">$2</span>`);
+	escapedText = linkify(escapedText);
 
-	instance.querySelector(".featured-message-text").innerHTML = linkify(escapedText);
+	instance.querySelector(".featured-message-text").innerHTML = escapedText;
 
-	// Parse emotes for featured messages too
 	if (data.emotes) {
 		data.emotes.forEach(e => {
 			instance.querySelector(".featured-message-text").innerHTML = instance.querySelector(".featured-message-text").innerHTML.replace(new RegExp(`\\b${e.name}\\b`, 'g'), `<img src="${e.imageUrl}" class="emote"/>`);
@@ -272,7 +272,8 @@ async function renderEventCard(data, type, platform) {
 	const message = data.text || data.message;
 	if (message && message.trim().length > 0) {
 		commentWrapper.style.display = "block";
-		instance.querySelector(".sub-comment-text").innerText = message;
+		const commentTextEl = instance.querySelector(".sub-comment-text");
+		commentTextEl.innerHTML = linkify(escapeHtml(message));
 	}
 
 	AddSubCardItem(instance, data.messageId || data.eventId, platform, data.user?.id);
@@ -307,8 +308,8 @@ async function TwitchChatMessage(data) {
 	const messageDiv = instance.querySelector("#message");
 	if (showMessage) {
 		messageDiv.innerText = data.message.message;
-		// Detect and highlight @mentions
 		messageDiv.innerHTML = messageDiv.innerHTML.replace(/(^|\s)(@[^\s<]+)/g, `$1<span style="font-weight: bold; color: #A644FF;">$2</span>`);
+		messageDiv.innerHTML = linkify(messageDiv.innerHTML);
 	}
 	if (data.message.isMe) messageDiv.style.color = data.message.color;
 
@@ -469,8 +470,8 @@ async function YouTubeMessage(data) {
 	const messageDiv = instance.querySelector("#message");
 	if (showMessage) {
 		messageDiv.innerText = data.message;
-		// Detect and highlight @mentions
 		messageDiv.innerHTML = messageDiv.innerHTML.replace(/(^|\s)(@[^\s<]+)/g, `$1<span style="font-weight: bold; color: #FF0000;">$2</span>`);
+		messageDiv.innerHTML = linkify(messageDiv.innerHTML);
 	}
 
 	if (showPlatform) instance.querySelector("#platform").innerHTML = `<img src="icons/platforms/youtube.png" class="platform"/>`;
@@ -607,7 +608,6 @@ function boilTraceSmoothPath(c, pts) {
 }
 function initBoilingBorder(canvas, contentW, contentH, bottomExtension = 0) {
 	const P = BOIL_CFG.padding, R = BOIL_CFG.cornerRadius, cw = contentW + P*2, ch = contentH + P*2 + bottomExtension;
-	const dpr = (window.devicePixelRatio || 1) * scaleFactor;
 	canvas.width = cw * dpr; canvas.height = ch * dpr;
 	canvas.style.width = cw + 'px'; canvas.style.height = ch + 'px';
 	const ctx = canvas.getContext('2d'); ctx.scale(dpr, dpr);
@@ -744,6 +744,12 @@ async function GetAvatar(username, providedUrl, platform) {
 		}
 	}
 	return `https://api.dicebear.com/7.x/thumbs/svg?seed=${encodeURIComponent(username)}&backgroundColor=b6e3f4,c0aede,d1d4f9`;
+}
+
+function escapeHtml(text) {
+	const div = document.createElement('div');
+	div.innerText = text;
+	return div.innerHTML;
 }
 
 function linkify(text) {

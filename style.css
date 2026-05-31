@@ -218,6 +218,7 @@ li {
 
 .sub-event-container #timestamp {
 	color: #000000 !important;
+	font-weight: 500;
 }
 
 #message {
