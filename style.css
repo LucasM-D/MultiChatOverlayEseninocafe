@@ -9,10 +9,8 @@
 }
 
 html, body {
-	width: 502px;
-	min-width: 502px;
-	max-width: 502px;
-	--container-width: 502px;
+	--width: 502px;
+	width: var(--width);
 	font-size: 18px;
 	font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 	letter-spacing: 0.001em;
@@ -45,7 +43,7 @@ html, body {
 	position: relative;
 	background: transparent;
 	padding: 0;
-	width: var(--container-width);
+	width: var(--width);
 	height: 100%;
 	box-sizing: border-box;
 	transform: translateZ(0);
