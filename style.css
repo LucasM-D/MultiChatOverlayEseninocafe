@@ -9,10 +9,7 @@
 }
 
 html, body {
-	--width: 502px;
-	width: var(--width);
-	min-width: var(--width);
-	max-width: var(--width);
+
 	font-size: 18px;
 	font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 	letter-spacing: 0.001em;
