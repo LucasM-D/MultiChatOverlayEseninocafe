@@ -530,27 +530,21 @@ li.sub-card-li {
 }
 
 /* Contrast Outline Setting */
-.contrast-outline #message,
-.contrast-outline #replyMsg,
-.contrast-outline .sub-comment-text,
-.contrast-outline .featured-message-text,
-.contrast-outline .sub-description,
-.contrast-outline #timestamp,
-.contrast-outline .featured-header-text {
+.contrast-outline #messageContainer #message,
+.contrast-outline #messageContainer #replyMsg,
+.contrast-outline #messageContainer #timestamp {
 	-webkit-text-stroke: 3px #000000;
 	paint-order: stroke fill;
 }
 
-.contrast-outline [data-platform="twitch"] #username,
-.contrast-outline [data-platform="twitch"] #replyUser,
-.contrast-outline [data-platform="twitch"] #receiver-username {
+.contrast-outline [data-platform="twitch"] #messageContainer #username,
+.contrast-outline [data-platform="twitch"] #messageContainer #replyUser {
 	-webkit-text-stroke: 3px #2E0E4C;
 	paint-order: stroke fill;
 }
 
-.contrast-outline [data-platform="youtube"] #username,
-.contrast-outline [data-platform="youtube"] #replyUser,
-.contrast-outline [data-platform="youtube"] #receiver-username {
+.contrast-outline [data-platform="youtube"] #messageContainer #username,
+.contrast-outline [data-platform="youtube"] #messageContainer #replyUser {
 	-webkit-text-stroke: 3px #600000;
 	paint-order: stroke fill;
 }
