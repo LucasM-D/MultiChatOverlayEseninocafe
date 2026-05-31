@@ -161,8 +161,8 @@ li {
 
 .platform img, img.platform, #platform img {
 	display: block;
-	width: 14px;
-	height: 17px;
+	width: 0.78em;
+	height: 0.94em;
 	object-fit: contain;
 }
 
@@ -173,8 +173,8 @@ li {
 
 .youtube .platform img, .youtube img.platform, .youtube #platform img,[data-platform="youtube"] .platform img, [data-platform="youtube"] #platform img, img[src*="youtube"] {
 	display: block;
-	width: 17px; 
-	height: 17px;
+	width: 0.94em; 
+	height: 0.94em;
 	object-fit: contain;
 }
 

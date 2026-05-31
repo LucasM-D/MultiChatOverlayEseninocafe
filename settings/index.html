@@ -13,8 +13,6 @@
         }
 
         #settings-container {
-            width: 40%;
-            min-width: 40%;
             height: 100vh;
             border: none;
             background: #1e1e1e;
@@ -25,6 +23,8 @@
             transform-origin: top left;
             width: calc(40% / 1.5);
             min-width: calc(40% / 1.5);
+            margin-right: calc(40% - (40% / 1.5));
+            flex-shrink: 0;
         }
 
         #settings-header {
@@ -116,10 +116,13 @@
         #widget-container {
             flex-grow: 1;
             height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         iframe#widget {
-            width: 100%;
+            width: 502px;
             height: 100%;
             border: none;
         }
