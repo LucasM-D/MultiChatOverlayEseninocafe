@@ -65,6 +65,16 @@
 			"group": "Appearance"
 		},
 		{
+			"id": "fontSize",
+			"label": "Font Size",
+			"description": "",
+			"type": "number",
+			"min": 1,
+			"max": 120,
+			"defaultValue": 18,
+			"group": "Appearance"
+		},
+		{
 			"id": "background",
 			"label": "Background",
 			"description": "",

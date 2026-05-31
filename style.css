@@ -12,6 +12,7 @@ html, body {
 	width: 502px;
 	min-width: 502px;
 	max-width: 502px;
+	font-size: 18px;
 	font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 	letter-spacing: 0.001em;
 	color: #000000;
@@ -180,7 +181,7 @@ li {
 	display: flex;
 	align-items: center;
 	font-weight: 700;
-	font-size: 18px;
+	font-size: 1em;
 	color: var(--twitch-purple); 
 	flex-shrink: 0;
 }
@@ -214,7 +215,7 @@ li {
 #timestamp {
 	display: flex;
 	align-items: center;
-	font-size: 16px;
+	font-size: 0.888em;
 	font-weight: 500;
 	color: #000000 !important;
 	margin-left: auto;
@@ -223,7 +224,7 @@ li {
 }
 
 #message {
-	font-size: 18px;
+	font-size: 1em;
 	font-weight: 500;
 	line-height: 1.2;
 	color: #000000;
@@ -260,15 +261,15 @@ li {
 #replyUser {
 	display: block;
 	font-weight: 700;
-	font-size: 18px;
-	line-height: 20px;
+	font-size: 1em;
+	line-height: 1.1em;
 }
 
 #replyMsg {
 	display: block;
 	font-weight: 500;
-	font-size: 18px;
-	line-height: 20px;
+	font-size: 1em;
+	line-height: 1.1em;
 	color: #000000;
 	white-space: nowrap;
 	overflow: hidden;
@@ -417,7 +418,7 @@ li.sub-card-li {
 }
 
 .featured-header-text {
-	font-size: 20px;
+	font-size: 1.11em;
 	font-weight: 700;
 	text-transform: uppercase;
 	color: #000000;
@@ -432,7 +433,7 @@ li.sub-card-li {
 }
 
 .featured-message-text {
-	font-size: 18px;
+	font-size: 1em;
 	font-weight: 500;
 	line-height: 1.2;
 	color: #000000;

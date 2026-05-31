@@ -22,6 +22,7 @@ const showMessage = GetBooleanParam("showMessage", true);
 const showTopGradient = GetBooleanParam("showTopGradient", true);
 
 const font = urlParams.get("font") || "";
+const fontSize = urlParams.get("fontSize") || "18";
 const background = urlParams.get("background") || "#ffffff";
 const backgroundOpacity = GetIntParam("backgroundOpacity") ?? 100;
 
@@ -45,6 +46,7 @@ const showStreamlabsDonations = GetBooleanParam("showStreamlabsDonations", true)
 const showStreamElementsTips = GetBooleanParam("showStreamElementsTips", true);
 
 if (font) document.body.style.fontFamily = font;
+document.body.style.fontSize = `${fontSize}px`;
 const mainContainer = document.getElementById('mainContainer');
 mainContainer.style.background = hexToRgba(background, backgroundOpacity / 100);
 
